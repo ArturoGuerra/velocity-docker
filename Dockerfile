@@ -1,6 +1,7 @@
 FROM openjdk:12
 
-WORKDIR /app
+RUN mkdir /data
+WORKDIR /data
 COPY . .
 
 CMD ["/bin/sh", "./start.sh"]
