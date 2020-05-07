@@ -1,9 +1,9 @@
 FROM openjdk:12
 
-RUN mkdir /data
-VOLUME /data
-WORKDIR /data
+WORKDIR /server
+COPY start.sh .
+COPY plugins /plugins
 
-COPY start.sh /
+ENV VELOCITY_JAR_URL="https://ci.velocitypowered.com/job/velocity-1.1.0/lastSuccessfulBuild/artifact/proxy/build/libs/velocity-proxy-1.1.0-SNAPSHOT-all.jar"
 
-CMD ["/bin/sh", "/start.sh"]
+CMD ["./start.sh"]
