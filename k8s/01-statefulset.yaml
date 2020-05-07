@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: velocity
+  name: velocity
+spec:
+  selector:
+    matchLabels:
+      app: velocity
+  serviceName: velocity
+  template:
+    metadata:
+      labels:
+        app: velocity
+    spec:
+      serviceAccountName: velocity
+      containers:
+        - image: arturoguerra/velocity:latest
+          name: velocity
+          ports:
+            - name: proxy
+              containerPort: 25577
+          env:
+            - name: MAX_MEMORY
+              value: 2G
+            - name: PLUGINS
+              value: "https://arturo-minecraft-server-installers.nyc3.digitaloceanspaces.com/kubelocity.jar"
+          volumeMounts:
+            - name: config
+              mountPath: /config
+          resources:
+            requests:
+                cpu: 100m
+                memory: 256Mi
+            limits:
+                cpu: "1"
+                memory: 2Gi
+      volumes:
+        - name: config
+          configMap:
+            name: velocity
