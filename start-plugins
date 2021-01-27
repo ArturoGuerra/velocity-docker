@@ -1,0 +1,21 @@
+#!/bin/bash
+
+TMP_PLUGINS_DIR=/tmp/plugins
+TMP_PLUGINS=/tmp/plugins.zip
+
+if [[ ! -d $PLUGINS_DIR ]] && [[ ! -z "${PLUGINS}" ]]; then
+    mkdir $TMP_PLUGINS_DIR
+    echo $PLUGINS
+    if ! curl -o $TMP_PLUGINS -fsSL $PLUGINS; then
+        echo "ERROR: Failed to download plugins" >&2
+        exit 2
+    fi 
+
+    if ! unzip $TMP_PLUGINS -d $TMP_PLUGINS_DIR; then
+        echo "ERROR: Unziping plugins" >&2
+        exit 2
+    fi
+
+    mv $TMP_PLUGINS_DIR $PLUGINS_DIR
+    chmod 775 $PLUGINS_DIR -R
+fi

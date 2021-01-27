@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export HOME=/data
+export VELOCITY_JAR=$HOME/velocity.jar
+export PLUGINS_DIR=$HOME/plugins
+
+echo "Setting initial memory to ${INIT_MEMORY:-${MEMORY}} and max to ${MAX_MEMORY:-${MEMORY}}"
+export JVM_OPTS="-Xms${INIT_MEMORY:-${MEMORY}} -Xmx${MAX_MEMORY:-${MEMORY}} ${JVM_OPTS}"

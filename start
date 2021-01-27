@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Velocity startup.."
+
+source /start-setup
+source /start-velocity
+source /start-plugins
+
+exec java $JVM_OPTS -jar $VELOCITY_JAR "$@"

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ ! -e $VELOCITY_JAR ]]; then
+    echo "Downloading ${VELOCITY_JAR_URL}"
+    if ! curl -o $VELOCITY_JAR -fsSL $VELOCITY_JAR_URL; then
+        echo "ERROR: failed to download velocity" >&2
+        exit 2
+    fi
+fi

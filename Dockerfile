@@ -1,9 +1,11 @@
-FROM openjdk:12
+FROM openjdk:11
 
-WORKDIR /server
-COPY start.sh .
-COPY plugins /plugins
+VOLUME ["/data"]
+WORKDIR /data
+COPY start /
+COPY start* /
 
-ENV VELOCITY_JAR_URL="https://ci.velocitypowered.com/job/velocity-1.1.0/lastSuccessfulBuild/artifact/proxy/build/libs/velocity-proxy-1.1.0-SNAPSHOT-all.jar"
+ENV VELOCITY_JAR_URL="https://versions.velocitypowered.com/download/1.1.3.jar"
+ENV MEMORY="512m"
 
-CMD ["./start.sh"]
+ENTRYPOINT [ "/start"]

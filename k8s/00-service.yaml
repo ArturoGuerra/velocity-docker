@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: velocity
+  name: velocity-dev
 spec:
   type: LoadBalancer
   externalTrafficPolicy: Local
@@ -10,4 +10,4 @@ spec:
     port: 25565
     targetPort: proxy
   selector:
-    app: velocity
+    app: velocity-dev
